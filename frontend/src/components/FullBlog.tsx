@@ -21,7 +21,7 @@ function FullBlog({ blog }:{blog:Blog}) {
                     <div className="text-slate-300 text-lg">Author</div>
                     <div className="flex w-full">
                         <div className="pr-4 flex flex-col justify-center">
-                            <Avatar size={6} authorName={blog.author.name || "Anonymous"}/>
+                            <Avatar size={"small"} authorName={blog.author.name || "Anonymous"}/>
                         </div>
                         <div>
                             <div className="text-xl font-bold">
