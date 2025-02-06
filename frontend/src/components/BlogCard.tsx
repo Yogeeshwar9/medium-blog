@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
 interface BlogCardProps {
-  authorName: string,
-  title: string,      
-  content: string,  
-  publishedDate: string,
-  id: string,        
+  authorName: string;
+  title: string;      
+  content: string;  
+  publishedDate: string;
+  id: string;        
 }
 
 export function Avatar({ authorName, size = 'small' }: { authorName: string; size?: "small" | "big" }) {
