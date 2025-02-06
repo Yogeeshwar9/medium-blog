@@ -3,15 +3,15 @@ import { useEffect, useState } from "react";
 import { BACKEND_URL } from "../config";
 
 export interface Blog {
-  content: String;
-  title: String;
-  id: String;
+  content: string;
+  title: string;
+  id: string;
   author: {
-    name: String;
+    name: string;
   };
 }
 
-export const useBlog = ({ id }: { id: String }) => {
+export const useBlog = ({ id }: { id: string }) => {
   const [loading, setLoading] = useState(true);
   const [blog, setBlog] = useState<Blog | undefined>(undefined); // Handle undefined explicitly
 

@@ -21,18 +21,21 @@ function Blogs() {
     }
   return (
     <>
-        <Appbar/>
-        <div className="flex justify-center">
-            <div>
-                {blogs.map(blog => <BlogCard 
-                    authorName={blog.author.name||"Anonymous"}
-                    title={blog.title}
-                    content={blog.content}
-                    publishedDate={"2nd Feb 2025"}
-                    id={blog.id}
-                />)}
-            </div>
+        <Appbar />
+      <div className="flex justify-center">
+        <div>
+          {blogs.map((blog) => (
+            <BlogCard
+              key={blog.id}
+              authorName={blog.author.name || "Anonymous"}
+              title={blog.title}
+              content={blog.content}
+              publishedDate={"2nd Feb 2025"}
+              id={blog.id}
+            />
+          ))}
         </div>
+      </div>
     </>
     
   )
