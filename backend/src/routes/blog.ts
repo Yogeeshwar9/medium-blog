@@ -57,6 +57,32 @@ blogRouter.post("/", async (c)=>{
         })
     }
 })
+
+blogRouter.get("/myPosts",async(c)=>{
+    const prisma = new PrismaClient({
+        datasourceUrl:c.env.DATABASE_URL,
+    }).$extends(withAccelerate())
+
+    const userId = c.get('userId');
+    const userData = await prisma.post.findMany({
+        where:{
+            authorId:userId
+        },
+        select:{
+            content:true,
+            title:true,
+            id:true,
+            author:{
+                select:{
+                    name:true
+                }
+            }
+        }
+    })
+    console.log(userData);
+    return c.json({userData})
+    
+})
   
 blogRouter.put("/", async (c)=>{
     const prisma = new PrismaClient({
