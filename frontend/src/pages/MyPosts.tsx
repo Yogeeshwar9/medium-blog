@@ -6,11 +6,13 @@ import Appbar from "../components/Appbar";
 import { BlogSkeleton } from "../components/BlogSkeleton";
 
 interface Posts{
-  authorName: string;
   title: string;      
   content: string;  
   publishedDate: string;
   id: string;
+  author: {
+    name: string;
+  };
 }
 
 function MyPosts() {
@@ -63,10 +65,14 @@ function MyPosts() {
         <Appbar />
         <div className="flex justify-center">
           <div>
-          {allPosts && allPosts.map((post) => (
+          {allPosts.length === 0 ? (
+            <div className="text-center">
+             <h2 className="text-2xl font-bold">No Posts Yet</h2>
+            </div>
+          ) :  ( allPosts.map((post) => (
             <div key={post.id} className="flex justify-between">
               <BlogCard 
-                authorName={post.authorName || "Anonymous"} 
+                authorName={post.author.name || "Anonymous"} 
                 publishedDate={"2nd Feb 2025"} 
                 title={post.title}
                 content={post.content} 
@@ -81,7 +87,7 @@ function MyPosts() {
                 </div>
               </div>
             </div>
-          ))}
+          )))}
           </div>
         </div>
         
