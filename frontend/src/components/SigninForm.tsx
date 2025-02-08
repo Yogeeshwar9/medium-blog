@@ -3,8 +3,10 @@ import { SigninInput } from "@yogeshwar9/medium_common";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import { Spinner } from "./Spinner";
 
 function SigninForm() {
+  const [loading,setLoading] = useState(false);
   const [formData, setFormData] = useState<SigninInput>({
     email: "",
     password: ""
@@ -15,22 +17,26 @@ function SigninForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(formData);
+    setLoading(true)
     try{
-        const response = await axios.post(`${BACKEND_URL}/api/v1/user/signin`,formData)
-        const jwt = response.data;
-        console.log(response.data);
-        localStorage.setItem("token",jwt)
-        navigate("/blogs")
+      const response = await axios.post(`${BACKEND_URL}/api/v1/user/signin`,formData)
+      const {token,name} = response.data;
+      // console.log(response.data);
+      localStorage.setItem("token",token)
+      localStorage.setItem("name",name)
+      setLoading(false);
+      navigate("/blogs")
     }
     catch(e){
-        console.log(e);
-        
+      console.log(e);
+      setLoading(false);  
     }
   };
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <form
+      {loading?(<Spinner/>):(
+        <form
         onSubmit={handleSubmit}
         className="w-96 bg-white p-8 shadow-lg rounded-lg"
       >
@@ -79,6 +85,7 @@ function SigninForm() {
           </button>
         </div>
       </form>
+      )}
     </div>
   );
 }

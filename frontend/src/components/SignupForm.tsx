@@ -13,13 +13,13 @@ function SignupForm() {
   const navigate = useNavigate();
   const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
+    // console.log(formData);
     try{
       const response = await axios.post(`${BACKEND_URL}/api/v1/user/signup`,formData)
       console.log(response.data.token);
       
-      const jwt = response.data.token;
-      localStorage.setItem("token",jwt)
+      const token = response.data.token;
+      localStorage.setItem("token",token)
       navigate("/blogs")
     }
     catch(e){
